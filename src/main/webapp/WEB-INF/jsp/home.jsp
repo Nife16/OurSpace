@@ -19,7 +19,10 @@
 		</c:otherwise>
 	</c:choose>
 	<a href="/sign-up">to sign up</a>
-
+	<a href="/sign-in">to sign in</a>
+	<c:if test="${user != null }">
+		<a href="/profile/${user.getId()}">to profile</a>
+	</c:if>
 </body>
 
 </html>

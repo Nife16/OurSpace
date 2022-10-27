@@ -1,7 +1,10 @@
 package com.space.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +58,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/sign-in")
-	public String signIn(@ModelAttribute User user, Model model) {
+	public String signIn(@ModelAttribute User user, Model model, HttpSession session) {
 		
 		User loggedInUser = userService.signIn(user);
 		
@@ -64,10 +67,46 @@ public class UserController {
 		}
 		
 		model.addAttribute("user", loggedInUser);
+		session.setAttribute("user", loggedInUser);
 		
 		return "home";
 		
 	}
+	
+
+    
+    @GetMapping("/profile/{userId}")
+    public String profile(Model model, @PathVariable Integer userId, HttpSession session) {
+        
+        if(userId == null) {
+            return "sign-in";
+        }
+        
+        User loggedInUser = userService.getUserById(userId);
+        
+        if(loggedInUser == null) {
+            return "sign-in";
+        }
+        
+        model.addAttribute("user", loggedInUser);
+        
+        
+        return "profile";
+        
+    }
+    
+    @GetMapping("/viewAll")
+    public String viewAll(Model model, HttpSession session) {
+        
+        
+        List<User> userList = userService.getAll();
+        
+        
+        model.addAttribute("userList", userList);
+        
+        return "list";
+        
+    }
 	
 
 }

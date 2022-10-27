@@ -16,7 +16,17 @@ public class User {
 		super();
 	}
 
-	public String getEmail() {
+	public User(Integer id, String email, String username, String password) {
+        super();
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+
+
+    public String getEmail() {
 		return email;
 	}
 
