@@ -3,13 +3,19 @@ package com.space.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.space.entity.User;
+import com.space.repo.UserRepo;
 
 @Service
 public class UserService {
 	
+    
+    @Autowired
+    UserRepo userRepo;
+    
 	int count = 1;
 	List<User> accounts = new ArrayList<User>();
 	
@@ -32,9 +38,10 @@ public class UserService {
 	}
 	
 	public void save(User user) {
-		user.setId(count);
-		count++;
-		accounts.add(user);
+//		user.setId(count);
+//		count++;
+//		accounts.add(user);
+	    userRepo.save(user);
 	}
     
     public User signIn(User user) {

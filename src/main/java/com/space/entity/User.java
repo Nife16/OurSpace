@@ -2,15 +2,33 @@ package com.space.entity;
 
 import java.util.Arrays;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user")
 public class User {
 	
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
+    
+    @Column(name="email", unique = true)
 	String email;
+    @Column(name="username")
 	String username;
+    @Column(name="password")
 	String password;
+    @Column(name="avvy")
 	String avvy; // the url the the image
-	AboutMe aboutMe;
-	Post[] posts;
+    
+//	AboutMe aboutMe;
+//	Post[] posts;
 	
 	public User() {
 		super();
@@ -58,21 +76,21 @@ public class User {
 		this.avvy = avvy;
 	}
 
-	public AboutMe getAboutMe() {
-		return aboutMe;
-	}
-
-	public void setAboutMe(AboutMe aboutMe) {
-		this.aboutMe = aboutMe;
-	}
-
-	public Post[] getPosts() {
-		return posts;
-	}
-
-	public void setPosts(Post[] posts) {
-		this.posts = posts;
-	}
+//	public AboutMe getAboutMe() {
+//		return aboutMe;
+//	}
+//
+//	public void setAboutMe(AboutMe aboutMe) {
+//		this.aboutMe = aboutMe;
+//	}
+//
+//	public Post[] getPosts() {
+//		return posts;
+//	}
+//
+//	public void setPosts(Post[] posts) {
+//		this.posts = posts;
+//	}
 
 	public Integer getId() {
 		return id;
@@ -85,7 +103,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password + ", avvy="
-				+ avvy + ", aboutMe=" + aboutMe + ", posts=" + Arrays.toString(posts) + "]";
+				+ avvy;
 	}
 	
 }
