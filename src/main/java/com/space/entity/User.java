@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +29,11 @@ public class User {
     @Column(name="avvy")
 	String avvy; // the url the the image
     
-//	AboutMe aboutMe;
-//	Post[] posts;
+    @OneToOne
+    @JoinColumn(name="aboutMeId", nullable = true)
+	AboutMe aboutMe;
+	
+	//	Post[] posts;
 	
 	public User() {
 		super();
