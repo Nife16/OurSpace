@@ -1,7 +1,5 @@
 package com.space.entity;
 
-import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,17 +18,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
     
-    @Column(name="email", unique = true)
+    @Column(name="email", unique = true, nullable = false)
 	String email;
     @Column(name="username")
 	String username;
-    @Column(name="password")
+    @Column(name="password", nullable = false)
 	String password;
     @Column(name="avvy")
 	String avvy; // the url the the image
     
     @OneToOne
-    @JoinColumn(name="aboutMeId", nullable = true)
+    @JoinColumn(name="aboutMeId")
 	AboutMe aboutMe;
 	
 	//	Post[] posts;

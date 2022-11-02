@@ -37,11 +37,11 @@ public class UserService {
 	    return accounts;
 	}
 	
-	public void save(User user) {
+	public User save(User user) {
 //		user.setId(count);
 //		count++;
 //		accounts.add(user);
-	    userRepo.save(user);
+	    return userRepo.save(user);
 	}
     
     public User signIn(User user) {
@@ -68,8 +68,7 @@ public class UserService {
 //                return signedUpUser;
 //            }
 //        }
-        
-        return null;
+       
     }
     
     public User getUserById(Integer userId) {
