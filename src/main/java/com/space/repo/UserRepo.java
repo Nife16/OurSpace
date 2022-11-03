@@ -10,7 +10,8 @@ import com.space.entity.User;
 public interface UserRepo extends JpaRepository<User, Integer>{
     
     @Query(value="select * from user where email = ?1 && password=?2", nativeQuery=true)
-    User signIn(String email, String password);
+    public User signIn(String email, String password);
     
-
+    @Query(value="select * from user where email = ?1", nativeQuery=true)
+    public User getByEmail(String email);
 }

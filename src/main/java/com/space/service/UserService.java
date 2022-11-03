@@ -22,25 +22,11 @@ public class UserService {
 	
 	
 	public List<User> getAll() {
-	    accounts.clear();
-	    User fakeGuy = new User(99, "sally", "sally", "123");
-        User fakeGuy1 = new User(100, "sally1", "sally1", "123");
-        User fakeGuy2 = new User(101, "sally2", "sally2", "123");
-        User fakeGuy3 = new User(102, "sally3", "sally3", "123");
-        User fakeGuy4 = new User(103, "sally4", "sally4", "123");
-        accounts.add(fakeGuy);
-        accounts.add(fakeGuy1);
-        accounts.add(fakeGuy2);
-        accounts.add(fakeGuy3);
-        accounts.add(fakeGuy4);
-        
-	    return accounts;
+	    
+	    return userRepo.findAll();
 	}
 	
 	public User save(User user) {
-//		user.setId(count);
-//		count++;
-//		accounts.add(user);
 	    return userRepo.save(user);
 	}
     
@@ -48,50 +34,30 @@ public class UserService {
         
         
         return userRepo.signIn(user.getEmail(), user.getPassword());
-//        accounts.clear();
-//        
-//        User fakeGuy = new User(99, "sally", "sally", "123");
-//        User fakeGuy1 = new User(100, "sally1", "sally1", "123");
-//        User fakeGuy2 = new User(101, "sally2", "sally2", "123");
-//        User fakeGuy3 = new User(102, "sally3", "sally3", "123");
-//        User fakeGuy4 = new User(103, "sally4", "sally4", "123");
-//        accounts.add(fakeGuy);
-//        accounts.add(fakeGuy1);
-//        accounts.add(fakeGuy2);
-//        accounts.add(fakeGuy3);
-//        accounts.add(fakeGuy4);
-//        
-//        for (User signedUpUser : accounts) {
-//            
-//            if(signedUpUser.getUsername().equals(user.getUsername())
-//                    && signedUpUser.getPassword().equals(user.getPassword())) {
-//                return signedUpUser;
-//            }
-//        }
+
        
     }
     
     public User getUserById(Integer userId) {
-        accounts.clear();
-        User fakeGuy = new User(99, "sally", "sally", "123");
-        User fakeGuy1 = new User(100, "sally1", "sally1", "123");
-        User fakeGuy2 = new User(101, "sally2", "sally2", "123");
-        User fakeGuy3 = new User(102, "sally3", "sally3", "123");
-        User fakeGuy4 = new User(103, "sally4", "sally4", "123");
-        accounts.add(fakeGuy);
-        accounts.add(fakeGuy1);
-        accounts.add(fakeGuy2);
-        accounts.add(fakeGuy3);
-        accounts.add(fakeGuy4);
         
-        for (User signedUpUser : accounts) {
-            
-            if(signedUpUser.getId().equals(userId)) {
-                return signedUpUser;
-            }
+        if(userRepo.findById(userId).isPresent()) {
+            return userRepo.findById(userId).get();
         }
         
-        return null;
+        throw new Error("User not found");
+        
+    }
+    
+    public User getUserByEmail(String email) {
+        
+        User foundUser = userRepo.getByEmail(email);
+        
+        if(foundUser == null) {
+           throw new Error("User not found");
+        }
+        
+        return foundUser;
+        
     }
 	
 

@@ -16,6 +16,7 @@ import com.space.entity.User;
 import com.space.service.UserService;
 
 @RestController
+@RequestMapping(value="/user")
 public class UserRestController {
 
     @Autowired
@@ -34,7 +35,11 @@ public class UserRestController {
         }
     }
 
-    @RequestMapping(value = "/signIn", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/signIn",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.POST
+            )
     public ResponseEntity<Object> signIn(@RequestBody User user) {
 
         try {
@@ -51,6 +56,25 @@ public class UserRestController {
         } catch(Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch(Error e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @RequestMapping(
+            value="/getByEmail/{email}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.GET
+            )
+    public ResponseEntity<Object> getUserByEmail(@PathVariable String email) {
+        
+        try {
+            User foundUser = userService.getUserByEmail(email);
+            
+            return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_GATEWAY);
+        } catch (Error e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

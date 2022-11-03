@@ -1,11 +1,14 @@
 package com.space.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,7 +34,9 @@ public class User {
     @JoinColumn(name="aboutMeId")
 	AboutMe aboutMe;
 	
-	//	Post[] posts;
+    @OneToMany
+    @JoinColumn(name="userId", referencedColumnName = "id")
+	List<Post> posts;
 	
 	public User() {
 		super();
@@ -79,21 +84,21 @@ public class User {
 		this.avvy = avvy;
 	}
 
-//	public AboutMe getAboutMe() {
-//		return aboutMe;
-//	}
-//
-//	public void setAboutMe(AboutMe aboutMe) {
-//		this.aboutMe = aboutMe;
-//	}
-//
-//	public Post[] getPosts() {
-//		return posts;
-//	}
-//
-//	public void setPosts(Post[] posts) {
-//		this.posts = posts;
-//	}
+	public AboutMe getAboutMe() {
+		return aboutMe;
+	}
+
+	public void setAboutMe(AboutMe aboutMe) {
+		this.aboutMe = aboutMe;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	public Integer getId() {
 		return id;
