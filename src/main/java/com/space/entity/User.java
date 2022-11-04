@@ -12,15 +12,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+// Annotate Objects with Entity, lets project know its a Object from the DB
 @Entity
+// Tells what table the object is coming from
 @Table(name="user")
 public class User {
 	
+	// ID lets you know its an id
     @Id
+    // Column maps to the same name as the column name in the database, it is case sensitive
     @Column(name = "id")
+    // This will configure your id to be auto generated, now you don't need a setter for your id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
     
+    // you can also give unique or nullable as args to Column, to toggle those attributes
     @Column(name="email", unique = true, nullable = false)
 	String email;
     @Column(name="username")
@@ -30,10 +36,14 @@ public class User {
     @Column(name="avvy")
 	String avvy; // the url the the image
     
+    
+    // Denotes a One-to-One relationship, Parent Object gets the annotation and foreign key
     @OneToOne
     @JoinColumn(name="aboutMeId")
 	AboutMe aboutMe;
 	
+    // Denotes a One-To-Many, One parent, many children, Child holds the foreign key
+    // Many denotes you will have a List of the object
     @OneToMany
     @JoinColumn(name="userId", referencedColumnName = "id")
 	List<Post> posts;

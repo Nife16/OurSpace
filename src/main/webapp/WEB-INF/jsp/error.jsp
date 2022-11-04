@@ -1,3 +1,6 @@
+<!-- This error is so you can view your errors on a dedicated page and debug your problem -->
+<!-- Without a dedicated error page, its harder to figure out how to fix your errors -->
+<!-- GOOGLE DEM ERRORS!!!!!!!! IT MAKES US STRONGER!!!!! -->
 <%@ page language="java"
 contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>

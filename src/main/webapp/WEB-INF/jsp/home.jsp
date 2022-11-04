@@ -1,4 +1,8 @@
+<!-- These top 3 lines are for importing -->
+<!-- This form import is so you can use form:form tags so you can accept info to the model and push it to the controller -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!-- These last two tags are for enabling java in your JSP, your model objects are java code, so you need them to display their values -->
+<!-- c:if, c:choose, c:when, c:forEach tags can also be used to do java logic for things like tables -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -11,7 +15,9 @@
 
 <body class="text-center">
 	<c:choose>
+	<!-- testing when the user is on the model, display their name -->
 		<c:when test="${user != null}">
+		<!-- The ${} is JSTL, this lets you do java in the html -->
 		    <h1>Hi ${user.getUsername()}</h1>
 		</c:when>
 		<c:otherwise>
