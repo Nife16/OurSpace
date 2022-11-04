@@ -1,0 +1,15 @@
+Git Commands!!!
+
+To start:
+1) Create your git repo online on github.com
+
+2) After your repo has been created, Copy the url in the long blue box
+
+3) If your project already exists on your computer, run git init to init,
+then run git remote add origin (the url copies from github)
+this will link your local repo to the online github repo
+
+4) Then run:
+git commit -m "first commit"  (This will be your first commit to push to your github repo)
+
+git push -u origin master (This will actually push your code up to github)
